@@ -16,9 +16,6 @@
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"></android.widget.Button>
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></fragment>
 
     <android.widget.Button
         android:layout_width="250dp"
