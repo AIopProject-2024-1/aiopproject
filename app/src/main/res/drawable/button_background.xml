@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF9800"/> <!-- 버튼 배경 색상 -->
+    <corners android:radius="16dp"/> <!-- 모서리 둥글게 설정 -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp"/>
+    <size
+        android:width="250dp"
+        android:height="wrap_content"/>
+    <shadow
+        android:color="#33000000"
+        android:dx="0"
+        android:dy="4dp"
+        android:radius="8dp"/>
+</shape>
