@@ -9,7 +9,7 @@
         android:bottom="10dp"/>
     <size
         android:width="250dp"
-        android:height="wrap_content"/>
+        android:height="85dp"/>
     <shadow
         android:color="#33000000"
         android:dx="0"
