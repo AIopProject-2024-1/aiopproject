@@ -19,7 +19,7 @@ public class home extends AppCompatActivity {
         btnyoga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectwho.class);
+                Intent intent = new Intent(getApplicationContext(), selectwhoyoga.class);
                 startActivity(intent);
             }
         });
@@ -29,7 +29,18 @@ public class home extends AppCompatActivity {
         btnpila.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectwho.class);
+                Intent intent = new Intent(getApplicationContext(), selectwhopila.class);
+                startActivity(intent);
+            }
+        });
+
+        Button btnhealth = findViewById(R.id.btnHealth);
+
+        btnhealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), selectwhohealth.class);
+                startActivity(intent);
             }
         });
 
