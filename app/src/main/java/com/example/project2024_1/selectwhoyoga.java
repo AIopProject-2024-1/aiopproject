@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class selectwho extends AppCompatActivity {
+public class selectwhoyoga extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

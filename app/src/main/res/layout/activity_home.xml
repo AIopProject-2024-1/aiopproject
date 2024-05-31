@@ -9,10 +9,10 @@
 
 
     <android.widget.Button
-        android:id="@+id/btnyoga"
+        android:id="@+id/btnYoga"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/button_background"
         android:padding="16dp"
         android:text="요가"
@@ -24,7 +24,7 @@
 
 
     <android.widget.Button
-        android:id="@+id/btnpila"
+        android:id="@+id/btnPila"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="필라테스"
@@ -33,12 +33,12 @@
         android:background="@drawable/button_background"
         android:padding="16dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintTop_toBottomOf="@id/btnyoga"
+        app:layout_constraintTop_toBottomOf="@id/btnYoga"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <android.widget.Button
-        android:id="@+id/btnhealth"
+        android:id="@+id/btnHealth"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="헬스"
@@ -47,7 +47,7 @@
         android:background="@drawable/button_background"
         android:padding="16dp"
         android:layout_marginTop="100dp"
-        app:layout_constraintTop_toBottomOf="@id/btnpila"
+        app:layout_constraintTop_toBottomOf="@id/btnPila"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
