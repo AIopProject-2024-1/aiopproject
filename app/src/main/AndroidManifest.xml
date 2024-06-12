@@ -22,9 +22,6 @@
             android:name=".selectwhoyoga"
             android:exported="false" />
         <activity
-            android:name="."
-            android:exported="false" />
-        <activity
             android:name=".selectwhat"
             android:exported="false" />
         <activity
@@ -43,10 +40,10 @@
             android:name=".cameraai"
             android:exported="false" />
         <activity
-            android:name=".Signup"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
