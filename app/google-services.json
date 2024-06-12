@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719957283434",
+    "project_id": "aioptest2024",
+    "storage_bucket": "aioptest2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719957283434:android:a6cf7b329f0284028b3013",
+        "android_client_info": {
+          "package_name": "com.example.project2024_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA16rzT77vF3FxWxsOEPuHpMvGTTpFzx80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
