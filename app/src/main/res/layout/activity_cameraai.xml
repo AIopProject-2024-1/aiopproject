@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".cameraai">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginStart="10pt"
+        android:layout_marginEnd="10pt"
+        android:layout_marginTop="5pt"
+        android:layout_marginBottom="5pt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginBottom="5pt">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20pt"
+                android:text="Right Pose"
+                android:gravity="center"
+                android:textSize="15pt"></TextView>
+            <androidx.camera.view.PreviewView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <androidx.camera.view.PreviewView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20pt"
+                android:text="Yours"
+                android:gravity="center"
+                android:textSize="15pt"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
