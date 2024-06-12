@@ -22,9 +22,6 @@
             android:name=".selectwhoyoga"
             android:exported="false" />
         <activity
-            android:name="."
-            android:exported="false" />
-        <activity
             android:name=".selectwhat"
             android:exported="false" />
         <activity

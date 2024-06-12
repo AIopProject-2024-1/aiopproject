@@ -26,7 +26,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="-146dp"
                 android:layout_marginRight="50dp"
-                android:background="@drawable/circle_shape"
+                android:background="@drawable/hum_icon"
 
                 android:src="@drawable/avatar" />
 

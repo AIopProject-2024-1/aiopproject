@@ -12,7 +12,5 @@
         android:height="85dp"/>
     <shadow
         android:color="#33000000"
-        android:dx="0"
-        android:dy="4dp"
         android:radius="8dp"/>
 </shape>
