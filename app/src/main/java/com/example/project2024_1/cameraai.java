@@ -43,6 +43,7 @@ public class cameraai extends AppCompatActivity {
 
     private VideoView videoview;
 
+    //basic setting
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class cameraai extends AppCompatActivity {
         poseDetector = PoseDetection.getClient(options);
     }
 
+    //권한 요청
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void requestPostNotificationsPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -85,6 +87,7 @@ public class cameraai extends AppCompatActivity {
         }
     }
 
+    //카메라 권한 요청
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -105,6 +108,7 @@ public class cameraai extends AppCompatActivity {
         }
     }
 
+    //카메라 실행
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
