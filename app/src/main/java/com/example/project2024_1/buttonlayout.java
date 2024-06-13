@@ -35,7 +35,7 @@ public class buttonlayout extends AppCompatActivity {
         btnmypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), mypage.class);
+                Intent intent = new Intent(getApplicationContext(), setting.class);//mypage로 나중에 수정
                 startActivity(intent);
             }
         });

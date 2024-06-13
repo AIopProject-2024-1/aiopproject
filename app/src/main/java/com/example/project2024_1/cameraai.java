@@ -44,6 +44,8 @@ public class cameraai extends AppCompatActivity {
         String videoPath = "android.resource://"+getPackageName()+"/raw/teachvideo";
         videoview.setVideoPath(videoPath);
         videoview.start();
+
+
         previewView = findViewById(R.id.userpreView);
 
         PoseDetectorOptions options =
