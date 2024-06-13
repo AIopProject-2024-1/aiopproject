@@ -1,14 +1,21 @@
 package com.example.project2024_1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
@@ -29,6 +36,8 @@ import java.util.concurrent.ExecutionException;
 
 public class cameraai extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_POST_NOTIFICATIONS = 1;
+
     private PreviewView previewView;
     private PoseDetector poseDetector;
 
@@ -39,10 +48,15 @@ public class cameraai extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cameraai);
 
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
+            requestPostNotificationsPermission();
+        }
+        //video
         videoview= findViewById(R.id.videopreView);
 
         String videoPath = "android.resource://"+getPackageName()+"/raw/teachvideo";
-        videoview.setVideoPath(videoPath);
+        Uri videoURI = Uri.parse(videoPath);
+        videoview.setVideoURI(videoURI);
         videoview.start();
 
 
@@ -56,6 +70,32 @@ public class cameraai extends AppCompatActivity {
         poseDetector = PoseDetection.getClient(options);
         startCamera();
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private void requestPostNotificationsPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    REQUEST_CODE_POST_NOTIFICATIONS);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("CameraAI", "Post Notifications 권한 허용");
+            } else {
+                Log.d("CameraAI", "Post Notifications 권한 거부됨");
+                Toast.makeText(this, "알림 권한 필요", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
