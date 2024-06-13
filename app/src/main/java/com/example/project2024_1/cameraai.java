@@ -61,7 +61,14 @@ public class cameraai extends AppCompatActivity {
 
         // Video setup
         videoview = findViewById(R.id.videopreView);
-        String videoPath = "android.resource://" + getPackageName() + "/raw/teachvideo";
+        String vname = getIntent().getStringExtra("VIDEO_NAME");
+        String videoPath = null;
+        if ("Yoga Video 1".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/yoga_video_1";
+        }
+        if ("Yoga Video 2".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/yoga_video_2";
+        }
         Uri videoURI = Uri.parse(videoPath);
         videoview.setVideoURI(videoURI);
         videoview.start();

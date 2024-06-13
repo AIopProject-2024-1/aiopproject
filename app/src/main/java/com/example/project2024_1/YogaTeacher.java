@@ -27,10 +27,10 @@ public class YogaTeacher extends AppCompatActivity {
 
         // 운동 영상 선택 시 activity_cameraai로 이동
         TextView video1 = findViewById(R.id.video1);
-        //TextView video2 = findViewById(R.id.video2);
+        TextView video2 = findViewById(R.id.video2);
 
         video1.setOnClickListener(v -> openCameraActivity("Yoga Video 1"));
-       // video2.setOnClickListener(v -> openCameraActivity("Yoga Video 2"));
+        video2.setOnClickListener(v -> openCameraActivity("Yoga Video 2"));
     }
 
     // activity_cameraai로 이동하며 선택한 영상 이름 전달
