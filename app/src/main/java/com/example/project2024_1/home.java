@@ -15,21 +15,21 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Button btnyoga = findViewById(R.id.btnYoga);
-
+//요가
         btnyoga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectwho.class);
+                Intent intent = new Intent(getApplicationContext(), YogaTeacher.class);
                 startActivity(intent);
             }
         });
-
+//필라테스 선생
         Button btnpila = findViewById(R.id.btnPila);
 
         btnpila.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectwho.class);
+                Intent intent = new Intent(getApplicationContext(), PilatesTeacher.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class home extends AppCompatActivity {
         btnhealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), selectwho.class);
+                Intent intent = new Intent(getApplicationContext(), HealthTeacher.class);
                 startActivity(intent);
             }
         });
