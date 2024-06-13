@@ -24,9 +24,6 @@
                 android:layout_height="200dp"
                 android:src="@drawable/humimg3"
                  /> <!-- 새로 추가된 이미지 뷰 -->
-
-
-
             <LinearLayout
 
                 android:layout_width="match_parent"

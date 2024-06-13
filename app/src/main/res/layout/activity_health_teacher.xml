@@ -82,6 +82,20 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <!-- 텍스트 내용 추가 -->
+                <TextView
+                    android:id="@+id/healthvideo1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Health Video 1"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/healthvideo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Health Video 2"
+                    android:textSize="18sp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
