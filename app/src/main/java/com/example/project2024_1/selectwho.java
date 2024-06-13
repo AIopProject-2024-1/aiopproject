@@ -23,7 +23,6 @@ public class selectwho extends AppCompatActivity {
         inflater = LayoutInflater.from(this);
 
         int[] imageResources = {R.drawable.humimg1, R.drawable.humimg2, R.drawable.humimg3, R.drawable.humimg4};
-        int[] layoutResources = {R.layout.activity_selectwhohealth, R.layout.activity_selectwhopila, R.layout.activity_selectwhoyoga};
 
         for (int i = 0; i < imageResources.length; i++) {
             ImageView imageView = new ImageView(this);
@@ -31,13 +30,6 @@ public class selectwho extends AppCompatActivity {
             imageView.setAdjustViewBounds(true);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setImageResource(imageResources[i]);
-            final int layoutResource = layoutResources[i];
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateScrollViewContent(layoutResource);
-                }
-            });
             scrollimg.addView(imageView);
         }
     }
