@@ -30,6 +30,10 @@ import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.pose.Pose;
@@ -155,11 +159,9 @@ public class cameraai extends AppCompatActivity {
         }, ContextCompat.getMainExecutor(this));
     }
 
+    //카메라 미리보기 바인딩
     private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
         Preview preview = new Preview.Builder().build();
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                .build();
 
         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -171,6 +173,11 @@ public class cameraai extends AppCompatActivity {
 
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
+
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
     }
 
@@ -180,16 +187,29 @@ public class cameraai extends AppCompatActivity {
         InputImage image = InputImage.fromMediaImage(imageProxy.getImage(), imageProxy.getImageInfo().getRotationDegrees());
 
         poseDetector.process(image)
-                .addOnSuccessListener(pose -> {
-                    drawPosesOnCamera(pose); // Pose detection successful
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                    Log.e("CameraAI", "실패", e); // 추가: 실패 로그
-                })
-                .addOnCompleteListener(task -> {
-                    imageProxy.close(); // 추가: 작업 완료 후 이미지 프로시 닫기
-                });
+                .addOnSuccessListener(
+                        new OnSuccessListener<Pose>() {
+                            @Override
+                            public void onSuccess(Pose pose) {
+                                drawPosesOnCamera(pose);
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("CameraAI", "실패", e);
+                            }
+                        })
+                .addOnCompleteListener(
+                        new OnCompleteListener<Pose>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Pose> task) {
+                                imageProxy.close();
+                            }
+                        }
+                )
+        ;
     }
 
     private void drawPosesOnCamera(Pose pose) {
