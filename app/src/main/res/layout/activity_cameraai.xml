@@ -15,14 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/selectedVideo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selected Video"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:layout_marginBottom="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,16 +22,17 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginBottom="5pt">
+
             <VideoView
-                android:layout_weight="1"
-                android:layout_gravity="center"
                 android:id="@+id/videopreView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="273dp"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="5pt"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,7 +42,8 @@
                 android:id="@+id/userpreView"
                 android:layout_width="match_parent"
                 android:layout_height="273dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginTop="5pt"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

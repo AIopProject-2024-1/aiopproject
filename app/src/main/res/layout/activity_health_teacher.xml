@@ -10,7 +10,7 @@
     <ImageButton
         android:id="@+id/orangeback"
         android:layout_width="125dp"
-        android:layout_height="736dp"
+        android:layout_height="850dp"
         android:background="@drawable/icon_select"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,20 +82,31 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <!-- 텍스트 내용 추가 -->
+
                 <TextView
                     android:id="@+id/healthvideo1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/textview_background"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
                     android:padding="10dp"
                     android:text="Health Video 1"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                   />
+
                 <TextView
                     android:id="@+id/healthvideo2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/textview_background"
                     android:padding="10dp"
+                    android:textSize="18sp"
                     android:text="Health Video 2"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="16dp"
+                    android:gravity="center"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
