@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,8 +30,10 @@ import androidx.camera.view.PreviewView;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseDetection;
 import com.google.mlkit.vision.pose.PoseDetector;
+import com.google.mlkit.vision.pose.PoseLandmark;
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
 
 import java.util.concurrent.ExecutionException;
@@ -42,12 +48,17 @@ public class cameraai extends AppCompatActivity {
 
     private VideoView videoview;
 
+    private Paint paint;
     //basic setting
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cameraai);
 
+        paint = new Paint();
+        paint.setColor(0xFFFFFF);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(10f);
         // Request camera permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
@@ -159,13 +170,15 @@ public class cameraai extends AppCompatActivity {
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
     }
 
+
+    //detect pose in camera
     @OptIn(markerClass = ExperimentalGetImage.class)
     private void processImageProxy(ImageProxy imageProxy) {
         InputImage image = InputImage.fromMediaImage(imageProxy.getImage(), imageProxy.getImageInfo().getRotationDegrees());
 
         poseDetector.process(image)
                 .addOnSuccessListener(pose -> {
-                    // Pose detection successful
+                    drawPosesOnCamera(pose);// Pose detection successful
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
@@ -173,8 +186,22 @@ public class cameraai extends AppCompatActivity {
                 })
                 .addOnCompleteListener(task -> {
                     imageProxy.close(); // 추가: 작업 완료 후 이미지 프로시 닫기
-                });
+                }
+                );
     }
+
+    private void drawPosesOnCamera(Pose pose){
+        previewView.post(()->{
+            Canvas canvas = previewView.getOverlay().lockCanvas();
+            if (canvas != null) {
+                canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+                for (PoseLandmark landmark : pose.getAllPoseLandmarks()) {
+                    PointF point = landmark.getPosition();
+                    canvas.drawCircle(point.x, point.y, 10, paint);
+                }
+            }
+        });
+
 
     @Override
     protected void onDestroy() {
