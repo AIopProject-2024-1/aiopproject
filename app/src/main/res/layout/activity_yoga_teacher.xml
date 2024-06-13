@@ -87,7 +87,7 @@
                 <!-- 운동 영상 목록을 표시할 TextView들을 여기에 추가합니다 -->
                 <TextView
                     android:id="@+id/video1"
-                    android:layout_width="300dp"
+                    android:layout_width="250dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/textview_background"
@@ -98,7 +98,7 @@
                     android:textSize="18sp" />
                 <TextView
                     android:id="@+id/video2"
-                    android:layout_width="300dp"
+                    android:layout_width="250dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/textview_background"

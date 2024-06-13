@@ -86,7 +86,7 @@
                 <!-- 텍스트 내용 추가 -->
                 <TextView
                     android:id="@+id/pilavideo1"
-                    android:layout_width="300dp"
+                    android:layout_width="250dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/textview_background"
@@ -98,7 +98,7 @@
                 <TextView
                     android:id="@+id/pilavideo2"
 
-                    android:layout_width="300dp"
+                    android:layout_width="250dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/textview_background"

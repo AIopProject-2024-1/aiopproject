@@ -42,6 +42,7 @@ import com.google.mlkit.vision.pose.PoseDetector;
 import com.google.mlkit.vision.pose.PoseLandmark;
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class cameraai extends AppCompatActivity {
@@ -243,6 +244,7 @@ public class cameraai extends AppCompatActivity {
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
             if (pose != null) {
+                List<PoseLandmark> allPoseLandmarks = pose.getAllPoseLandmarks();
                 for (PoseLandmark landmark : pose.getAllPoseLandmarks()) {
                     PointF point = landmark.getPosition();
                     canvas.drawCircle(point.x, point.y, 10, paint);
