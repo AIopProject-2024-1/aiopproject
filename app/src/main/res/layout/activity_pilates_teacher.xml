@@ -68,7 +68,7 @@
                     android:layout_height="90dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/humimg2"
+                    android:id="@+id/PilatesTeacher1"
                     android:src="@drawable/humimg2" />
 
 

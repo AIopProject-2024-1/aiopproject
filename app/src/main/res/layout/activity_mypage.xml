@@ -13,72 +13,56 @@
         <LinearLayout
             android:id="@+id/imageBorder"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="350dp"
             android:background=""
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
-            <LinearLayout
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:id="@+id/goback"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:scaleType="centerCrop"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Page"
-                        android:layout_marginTop="5dp"
-                        android:textSize="25dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></LinearLayout>
-            </LinearLayout>
+                android:layout_height="200dp"
+                android:src="@drawable/humimg3"
+                 /> <!-- 새로 추가된 이미지 뷰 -->
+
+
+
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"/>
+                android:layout_height="130dp"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+
+                    android:id="@+id/YogaTeacher1"
+                    android:src="@drawable/humimg3" />
+
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        />
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -93,28 +77,20 @@
             android:id="@+id/memolistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:backgroundTint="@color/black">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
-
-
-                <ImageView
-                    android:id="@+id/iv_zzslp"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:scaleType="centerInside"
-                    android:layout_marginLeft="10dp"
-                    android:clipToOutline="true" />
 
                 <TextView
                     android:id="@+id/tv_today"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -123,36 +99,14 @@
                     android:text="" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/iv_safari"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="15dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_review"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textColor=""
-                android:textSize="20dp"
-                android:textStyle="normal"/>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_zzslp2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:scaleType="centerInside"
-                    android:clipToOutline="true"
-                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:id="@+id/tv_today2"
