@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class buttonlayout extends AppCompatActivity {
+public class ButtonLayout extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class buttonlayout extends AppCompatActivity {
         btnmypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), setting.class);//mypage로 나중에 수정
+                Intent intent = new Intent(getApplicationContext(), mypage.class);
                 startActivity(intent);
             }
         });

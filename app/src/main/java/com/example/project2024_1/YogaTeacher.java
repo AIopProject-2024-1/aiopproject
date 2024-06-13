@@ -3,6 +3,7 @@ package com.example.project2024_1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +24,33 @@ public class YogaTeacher extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        ImageButton btnhome = findViewById(R.id.btnhome);
+        ImageButton btnsetting = findViewById(R.id.btnsetting);
+        ImageButton btnmypage = findViewById(R.id.btnmypage);
+        btnhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), home.class);
+                startActivity(intent);
+            }
+        });
+
+        btnsetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), setting.class);
+                startActivity(intent);
+            }
+        });
+
+        btnmypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), mypage.class);
+                startActivity(intent);
+            }
         });
 
         // 운동 영상 선택 시 activity_cameraai로 이동
