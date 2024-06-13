@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -49,6 +51,7 @@ public class cameraai extends AppCompatActivity {
     private VideoView videoview;
 
     private Paint paint;
+
     //basic setting
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,10 @@ public class cameraai extends AppCompatActivity {
         setContentView(R.layout.activity_cameraai);
 
         paint = new Paint();
-        paint.setColor(0xFFFFFF);
+        paint.setColor(0xFFFFFFFF); // 변경: 색상을 흰색으로 설정
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(10f);
+
         // Request camera permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
@@ -86,8 +90,8 @@ public class cameraai extends AppCompatActivity {
         if ("Pilates Video 2".equals(vname)){
             videoPath = "android.resource://" + getPackageName() + "/raw/pila_video_2";
         }
-        if ("Health Video 2".equals(vname)){
-            videoPath = "android.resource://" + getPackageName() + "/raw/health_video_2";
+        if ("Health Video 1".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/health_video_1";
         }
         if ("Health Video 2".equals(vname)){
             videoPath = "android.resource://" + getPackageName() + "/raw/health_video_2";
@@ -170,7 +174,6 @@ public class cameraai extends AppCompatActivity {
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
     }
 
-
     //detect pose in camera
     @OptIn(markerClass = ExperimentalGetImage.class)
     private void processImageProxy(ImageProxy imageProxy) {
@@ -178,7 +181,7 @@ public class cameraai extends AppCompatActivity {
 
         poseDetector.process(image)
                 .addOnSuccessListener(pose -> {
-                    drawPosesOnCamera(pose);// Pose detection successful
+                    drawPosesOnCamera(pose); // Pose detection successful
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
@@ -186,28 +189,45 @@ public class cameraai extends AppCompatActivity {
                 })
                 .addOnCompleteListener(task -> {
                     imageProxy.close(); // 추가: 작업 완료 후 이미지 프로시 닫기
-                }
-                );
+                });
     }
 
-    private void drawPosesOnCamera(Pose pose){
-        previewView.post(()->{
-            Canvas canvas = previewView.getOverlay().lockCanvas();
-            if (canvas != null) {
-                canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-                for (PoseLandmark landmark : pose.getAllPoseLandmarks()) {
-                    PointF point = landmark.getPosition();
-                    canvas.drawCircle(point.x, point.y, 10, paint);
-                }
-            }
+    private void drawPosesOnCamera(Pose pose) {
+        previewView.post(() -> {
+            PoseOverlayView poseOverlayView = new PoseOverlayView(this, pose, paint); // 추가: PoseOverlayView 생성
+            previewView.getOverlay().clear(); // 추가: 기존 오버레이 지우기
+            previewView.getOverlay().add(poseOverlayView); // 추가: 새로운 오버레이 추가
         });
-
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (poseDetector != null) {
             poseDetector.close(); // 추가: poseDetector 닫기
+        }
+    }
+
+    // 추가: PoseOverlayView 클래스 정의
+    private static class PoseOverlayView extends View {
+        private Pose pose;
+        private Paint paint;
+
+        public PoseOverlayView(Context context, Pose pose, Paint paint) {
+            super(context);
+            this.pose = pose;
+            this.paint = paint;
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            if (pose != null) {
+                for (PoseLandmark landmark : pose.getAllPoseLandmarks()) {
+                    PointF point = landmark.getPosition();
+                    canvas.drawCircle(point.x, point.y, 10, paint);
+                }
+            }
         }
     }
 }
