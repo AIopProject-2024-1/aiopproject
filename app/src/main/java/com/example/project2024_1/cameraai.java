@@ -69,6 +69,18 @@ public class cameraai extends AppCompatActivity {
         if ("Yoga Video 2".equals(vname)){
             videoPath = "android.resource://" + getPackageName() + "/raw/yoga_video_2";
         }
+        if ("Pilates Video 1".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/pila_video_2";
+        }
+        if ("Pilates Video 2".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/pila_video_2";
+        }
+        if ("Health Video 2".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/health_video_2";
+        }
+        if ("Health Video 2".equals(vname)){
+            videoPath = "android.resource://" + getPackageName() + "/raw/health_video_2";
+        }
         Uri videoURI = Uri.parse(videoPath);
         videoview.setVideoURI(videoURI);
         videoview.start();
