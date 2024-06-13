@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.VideoView;
 
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
@@ -18,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseDetection;
 import com.google.mlkit.vision.pose.PoseDetector;
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
@@ -29,11 +32,18 @@ public class cameraai extends AppCompatActivity {
     private PreviewView previewView;
     private PoseDetector poseDetector;
 
+    private VideoView videoview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cameraai);
 
+        videoview= findViewById(R.id.videopreView);
+
+        String videoPath = "android.resource://"+getPackageName()+"/raw/teachvideo";
+        videoview.setVideoPath(videoPath);
+        videoview.start();
         previewView = findViewById(R.id.userpreView);
 
         PoseDetectorOptions options =
@@ -53,7 +63,7 @@ public class cameraai extends AppCompatActivity {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                 bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
-                Log.e("CameraAI", "Error starting camera", e);
+                Log.e("CameraAI", "실행안됨", e);
             }
         }, ContextCompat.getMainExecutor(this));
     }
@@ -78,17 +88,14 @@ public class cameraai extends AppCompatActivity {
     }
 
     @OptIn(markerClass = ExperimentalGetImage.class) private void processImageProxy(ImageProxy imageProxy) {
-        @SuppressWarnings("ConstantConditions")
         InputImage image = InputImage.fromMediaImage(imageProxy.getImage(), imageProxy.getImageInfo().getRotationDegrees());
 
         poseDetector.process(image)
                 .addOnSuccessListener(pose -> {
-                    // Handle successful pose detection
-                    // You can draw the pose on a custom overlay here
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
-                    Log.e("CameraAI", "Pose detection failed", e);
+                    Log.e("CameraAI", "실패", e);
                 })
                 .addOnCompleteListener(task -> {
                     imageProxy.close();
