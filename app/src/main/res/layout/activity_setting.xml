@@ -161,5 +161,11 @@
 
     </LinearLayout>
 </ScrollView>
+    <include
+        android:id="@+id/buttonlayout"
+        layout="@layout/buttonlayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
