@@ -21,11 +21,14 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/humimg3"
-                 /> <!-- 새로 추가된 이미지 뷰 -->
+                android:layout_height="230dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_chikawa" />
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#F4EFD9" />
 
             <LinearLayout
 
@@ -35,11 +38,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_gravity="center"
-
-                    android:id="@+id/YogaTeacher1"
-                    android:src="@drawable/humimg3" />
+                    android:layout_height="92dp"
+                    android:src="@drawable/profile_sunglasscat" />
 
                 <LinearLayout
 
@@ -50,19 +50,24 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="현재 몸무게: 90kg"/>
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="목표 몸무게: 50kg"/>
+
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="좌우명: 적당히 살지마"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -80,54 +85,79 @@
             android:orientation="vertical"
             android:backgroundTint="@color/black">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#D7DADC" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_height="80sp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_today"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor=""
                     android:gravity="center_vertical"
-                    android:text="" />
+                    android:text="상상할 수 없는 꿈을 꾸고 있다면, 상상 할 수 없는 노력을 해라."
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#D7DADC" />
 
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+
                 android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/profile_sunglasscat" />
 
                 <TextView
                     android:id="@+id/tv_today2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="25dp"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor=""
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
                     android:gravity="center_vertical"
-                    android:text="" />
+                    android:text="2024-06-14 운동과 독서"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D7D0DC" />
+
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:layout_marginTop="15dp"
+                android:paddingStart="1dp"
+                android:paddingTop="1dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="1dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/profile_killer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
