@@ -23,7 +23,6 @@ import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
@@ -43,6 +42,7 @@ public class cameraai extends AppCompatActivity {
 
     private VideoView videoview;
 
+    //basic setting
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +52,11 @@ public class cameraai extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
         } else {
-            startCamera();
+            startCamera(); // 추가: 권한이 이미 승인된 경우 카메라 시작
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPostNotificationsPermission();
+            requestPostNotificationsPermission(); // 추가: TIRAMISU 버전 이상일 경우 알림 권한 요청
         }
 
         // Video setup
@@ -76,6 +76,7 @@ public class cameraai extends AppCompatActivity {
         poseDetector = PoseDetection.getClient(options);
     }
 
+    //권한 요청
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void requestPostNotificationsPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -85,26 +86,28 @@ public class cameraai extends AppCompatActivity {
         }
     }
 
+    //카메라 권한 요청
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCamera();
+                startCamera(); // 추가: 카메라 권한이 승인된 경우 카메라 시작
             } else {
-                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_LONG).show(); // 추가: 카메라 권한 거부 시 메시지 표시
             }
         } else if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("CameraAI", "Post Notifications 권한 허용");
+                Log.d("CameraAI", "Post Notifications 권한 허용"); // 추가: 알림 권한 허용 로그
             } else {
-                Log.d("CameraAI", "Post Notifications 권한 거부됨");
-                Toast.makeText(this, "알림 권한 필요", Toast.LENGTH_LONG).show();
+                Log.d("CameraAI", "Post Notifications 권한 거부됨"); // 추가: 알림 권한 거부 로그
+                Toast.makeText(this, "알림 권한 필요", Toast.LENGTH_LONG).show(); // 추가: 알림 권한 필요 메시지
             }
         }
     }
 
+    //카메라 실행
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
@@ -113,7 +116,7 @@ public class cameraai extends AppCompatActivity {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                 bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
-                Log.e("CameraAI", "실행안됨", e);
+                Log.e("CameraAI", "실행안됨", e); // 추가: 예외 처리 로그
             }
         }, ContextCompat.getMainExecutor(this));
     }
@@ -147,10 +150,10 @@ public class cameraai extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
-                    Log.e("CameraAI", "실패", e);
+                    Log.e("CameraAI", "실패", e); // 추가: 실패 로그
                 })
                 .addOnCompleteListener(task -> {
-                    imageProxy.close();
+                    imageProxy.close(); // 추가: 작업 완료 후 이미지 프로시 닫기
                 });
     }
 
@@ -158,7 +161,7 @@ public class cameraai extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (poseDetector != null) {
-            poseDetector.close();
+            poseDetector.close(); // 추가: poseDetector 닫기
         }
     }
 }
