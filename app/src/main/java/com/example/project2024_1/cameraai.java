@@ -27,7 +27,6 @@ import androidx.core.content.ContextCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseDetection;
 import com.google.mlkit.vision.pose.PoseDetector;
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
@@ -36,6 +35,7 @@ import java.util.concurrent.ExecutionException;
 
 public class cameraai extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_CAMERA_PERMISSION = 10;
     private static final int REQUEST_CODE_POST_NOTIFICATIONS = 1;
 
     private PreviewView previewView;
@@ -48,17 +48,23 @@ public class cameraai extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cameraai);
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
+        // Request camera permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
+        } else {
+            startCamera();
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             requestPostNotificationsPermission();
         }
-        //video
-        videoview= findViewById(R.id.videopreView);
 
-        String videoPath = "android.resource://"+getPackageName()+"/raw/teachvideo";
+        // Video setup
+        videoview = findViewById(R.id.videopreView);
+        String videoPath = "android.resource://" + getPackageName() + "/raw/teachvideo";
         Uri videoURI = Uri.parse(videoPath);
         videoview.setVideoURI(videoURI);
         videoview.start();
-
 
         previewView = findViewById(R.id.userpreView);
 
@@ -68,25 +74,28 @@ public class cameraai extends AppCompatActivity {
                         .build();
 
         poseDetector = PoseDetection.getClient(options);
-        startCamera();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    private void requestPostNotificationsPermission(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED) {
+    private void requestPostNotificationsPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.POST_NOTIFICATIONS},
                     REQUEST_CODE_POST_NOTIFICATIONS);
         }
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
+        if (requestCode == REQUEST_CODE_CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startCamera();
+            } else {
+                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("CameraAI", "Post Notifications 권한 허용");
             } else {
@@ -95,7 +104,6 @@ public class cameraai extends AppCompatActivity {
             }
         }
     }
-
 
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
@@ -129,11 +137,13 @@ public class cameraai extends AppCompatActivity {
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
     }
 
-    @OptIn(markerClass = ExperimentalGetImage.class) private void processImageProxy(ImageProxy imageProxy) {
+    @OptIn(markerClass = ExperimentalGetImage.class)
+    private void processImageProxy(ImageProxy imageProxy) {
         InputImage image = InputImage.fromMediaImage(imageProxy.getImage(), imageProxy.getImageInfo().getRotationDegrees());
 
         poseDetector.process(image)
                 .addOnSuccessListener(pose -> {
+                    // Pose detection successful
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
